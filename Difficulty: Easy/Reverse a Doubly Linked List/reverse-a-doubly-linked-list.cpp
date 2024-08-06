@@ -103,16 +103,17 @@ class Solution
     public:
     Node* reverseDLL(Node * head)
     {
-        Node *p = head -> next;
-        while(p)
+        if(head == NULL || head->next == NULL) return head;
+        Node* curr = head;
+        Node* previ = nullptr;
+        while(curr != nullptr)
         {
-            head -> next = head -> prev;
-            head -> prev = p;
-            head = p;
-            p = p -> next;
+            previ = curr -> prev;
+            curr -> prev = curr -> next;
+            curr -> next = previ;
+            curr = curr -> prev;
         }
-        head -> next = head -> prev;
-        head -> prev = p;
+        head = previ -> prev;
         return head;
     }
 };
